@@ -1,0 +1,38 @@
+[project]
+name = "otis"
+version = "0.1.0"
+description = "Otis - webhook-driven AI Farm processing service"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "fastapi>=0.115.0",
+    "uvicorn[standard]>=0.32.0",
+    "sqlalchemy>=2.0.0",
+    "psycopg2-binary>=2.9.0",
+    "alembic>=1.13.0",
+    "celery[redis]>=5.4.0",
+    "pydantic[email]>=2.9.0",
+    "pydantic-settings>=2.6.0",
+    "httpx>=0.27.0",
+]
+
+[dependency-groups]
+dev = [
+    "ruff>=0.15.17",
+]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "C4", "SIM"]
+# B008: FastAPI relies on calling Depends()/Header() in argument defaults.
+ignore = ["B008"]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/otis", "src/webhook", "src/aifarm", "src/util", "src/infrastructure"]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"

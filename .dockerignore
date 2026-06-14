@@ -1,0 +1,10 @@
+.git
+.gitignore
+.venv
+__pycache__/
+*.pyc
+.env
+.ruff_cache
+.python-version
+*.md
+!README.md
