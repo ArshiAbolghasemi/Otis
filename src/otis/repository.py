@@ -14,13 +14,13 @@ class SubmissionRepository:
         self._session = session
 
     def create(
-        self, *, email: str, upload_link: str, model_size: str, model_type: str
+        self, *, email: str, upload_link: str, model_size: str, product_id: int
     ) -> Submission:
         submission = Submission(
             email=email,
             upload_link=upload_link,
             model_size=model_size,
-            model_type=model_type,
+            product_id=product_id,
             status=SubmissionStatus.PENDING,
         )
         self._session.add(submission)

@@ -1,0 +1,250 @@
+/* Palette taken from the AI Farm logo: cream paper, leaf green, ink black. */
+:root {
+  --paper: #f7f3e8;
+  --card: #fffdf8;
+  --ink: #1f2020;
+  --muted: #6b6a63;
+  --leaf: #64a445;
+  --leaf-dark: #4f8636;
+  --line: #e3ddcd;
+  --danger: #b3261e;
+  --radius: 14px;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --paper: #17181a;
+    --card: #202224;
+    --ink: #f2f0ea;
+    --muted: #a3a199;
+    --leaf: #7cbb59;
+    --leaf-dark: #64a445;
+    --line: #35383b;
+    --danger: #f2857c;
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  background: var(--paper);
+  color: var(--ink);
+  font: 16px/1.55 ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+
+.card {
+  width: min(560px, 100%);
+  padding: 32px;
+  text-align: center;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: calc(var(--radius) + 6px);
+  box-shadow: 0 12px 32px rgb(0 0 0 / 6%);
+}
+
+.logo {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+}
+
+h1 {
+  margin: 12px 0 6px;
+  font-size: 1.5rem;
+}
+
+h2 {
+  margin: 0 0 4px;
+  font-size: 1.05rem;
+}
+
+.lede {
+  margin: 0 0 20px;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+.field {
+  margin-bottom: 18px;
+  text-align: left;
+}
+
+label,
+.label {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+input[type="email"],
+select {
+  width: 100%;
+  padding: 11px 12px;
+  font: inherit;
+  color: var(--ink);
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  appearance: none;
+}
+
+select {
+  /* Chevron, so the native arrow is not lost to appearance: none. */
+  padding-right: 34px;
+  background-image: linear-gradient(45deg, transparent 50%, var(--muted) 50%),
+    linear-gradient(135deg, var(--muted) 50%, transparent 50%);
+  background-position: right 16px center, right 11px center;
+  background-size: 5px 5px, 5px 5px;
+  background-repeat: no-repeat;
+}
+
+input[type="email"]:focus,
+select:focus,
+.dropzone:focus-within {
+  border-color: var(--leaf);
+  outline: 2px solid color-mix(in srgb, var(--leaf) 35%, transparent);
+  outline-offset: 1px;
+}
+
+.segmented {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 6px;
+  padding: 4px;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+}
+
+.segmented label {
+  margin: 0;
+}
+
+.segmented input {
+  position: absolute;
+  opacity: 0;
+}
+
+.segmented span {
+  display: block;
+  padding: 8px 0;
+  text-align: center;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: background 0.15s, color 0.15s;
+}
+
+.segmented input:checked + span {
+  color: #fff;
+  background: var(--leaf);
+}
+
+.segmented input:focus-visible + span {
+  outline: 2px solid var(--leaf);
+  outline-offset: 2px;
+}
+
+.dropzone {
+  display: grid;
+  gap: 4px;
+  place-items: center;
+  margin: 0;
+  padding: 28px 20px;
+  font-weight: 400;
+  cursor: pointer;
+  border: 2px dashed var(--line);
+  border-radius: var(--radius);
+  transition: border-color 0.15s, background 0.15s;
+}
+
+.dropzone:hover,
+.dropzone.is-dragging {
+  border-color: var(--leaf);
+  background: color-mix(in srgb, var(--leaf) 8%, transparent);
+}
+
+.dropzone.has-file {
+  border-style: solid;
+  border-color: var(--leaf);
+}
+
+.dropzone-icon {
+  font-size: 1.6rem;
+  color: var(--leaf);
+}
+
+.dropzone-title {
+  font-weight: 600;
+  overflow-wrap: anywhere;
+}
+
+.dropzone-hint {
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+button {
+  padding: 11px 20px;
+  font: inherit;
+  font-weight: 600;
+  color: #fff;
+  cursor: pointer;
+  background: var(--leaf);
+  border: none;
+  border-radius: 10px;
+  transition: background 0.15s;
+}
+
+button:hover:not(:disabled) {
+  background: var(--leaf-dark);
+}
+
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.45;
+}
+
+#submit {
+  width: 100%;
+  margin-top: 6px;
+}
+
+.progress {
+  height: 8px;
+  margin-top: 16px;
+  overflow: hidden;
+  background: var(--line);
+  border-radius: 999px;
+}
+
+.progress-bar {
+  width: 0;
+  height: 100%;
+  background: var(--leaf);
+  transition: width 0.2s;
+}
+
+.message {
+  margin: 16px 0 0;
+  font-size: 0.9rem;
+}
+
+.error {
+  color: var(--danger);
+}
+
+.result {
+  margin-top: 8px;
+}
+
+.result .lede {
+  margin-bottom: 0;
+}

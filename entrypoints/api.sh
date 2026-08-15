@@ -3,7 +3,7 @@
 set -euo pipefail
 cd "$(dirname "$0")/.."
 
-bash scripts/migrate.sh
+bash entrypoints/migrate.sh
 
 HOST="${OTIS_HOST:-0.0.0.0}"
 PORT="${OTIS_PORT:-8000}"

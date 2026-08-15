@@ -17,3 +17,15 @@ class UnzipError(OtisError):
 
 class SubmissionNotFoundError(OtisError):
     """Raised when a referenced submission does not exist."""
+
+
+class AIFarmError(OtisError):
+    """Raised when AI Farm fails to produce a result for a request."""
+
+
+class StorageError(OtisError):
+    """Raised when a file cannot be stored, fetched or linked in object storage."""
+
+
+class InvalidUploadError(OtisError):
+    """Raised when an uploaded file is not an acceptable dataset archive."""

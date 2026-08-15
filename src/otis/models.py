@@ -21,7 +21,7 @@ class SubmissionStatus(str, enum.Enum):
 
 
 class Submission(Base):
-    """A webhook submission and its processing state."""
+    """A model request and its processing state."""
 
     __tablename__ = "submissions"
 
@@ -29,7 +29,8 @@ class Submission(Base):
     email: Mapped[str] = mapped_column(String(320), nullable=False)
     upload_link: Mapped[str] = mapped_column(String(2048), nullable=False)
     model_size: Mapped[str] = mapped_column(String(64), nullable=False)
-    model_type: Mapped[str] = mapped_column(String(128), nullable=False)
+    #: AI Farm product id (see :class:`aifarm.products.Product`).
+    product_id: Mapped[int] = mapped_column(Integer, nullable=False)
     status: Mapped[SubmissionStatus] = mapped_column(
         Enum(SubmissionStatus, name="submission_status"),
         nullable=False,

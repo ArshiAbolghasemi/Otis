@@ -18,7 +18,7 @@ RUN uv pip install --system .
 # Application entrypoints and migrations.
 COPY main.py alembic.ini ./
 COPY migrations ./migrations
-COPY scripts ./scripts
-RUN chmod +x scripts/*.sh
+COPY entrypoints ./entrypoints
+RUN chmod +x entrypoints/*.sh
 
 EXPOSE 8000

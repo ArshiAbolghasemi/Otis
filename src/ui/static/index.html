@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>AI Farm — Request a model</title>
+    <link rel="icon" href="/static/logo.png" />
+    <link rel="stylesheet" href="/static/style.css" />
+  </head>
+  <body>
+    <main class="card">
+      <img class="logo" src="/static/logo.png" alt="AI Farm" width="120" height="120" />
+      <h1>Request a model</h1>
+      <p class="lede">
+        Tell us what to train, upload your dataset, and we will email you the
+        result when it is ready.
+      </p>
+
+      <form id="form" novalidate>
+        <div class="field">
+          <label for="email">Your email</label>
+          <input id="email" name="email" type="email" placeholder="you@example.com" required />
+        </div>
+
+        <div class="field">
+          <label for="product">What do you want to build?</label>
+          <select id="product" name="product_id" required>
+            <option value="1">Image Classification</option>
+            <option value="2">Time Series Classification</option>
+            <option value="3">Tabular Features Classification</option>
+            <option value="4">Multi Modal Classification</option>
+            <option value="5">Image Regression</option>
+            <option value="6">Time Series Regression</option>
+            <option value="7">Tabular Features Regression</option>
+            <option value="8">Multi Modal Regression</option>
+            <option value="9">Multi Modal Multi Head Classification and Regression</option>
+            <option value="10">Image Segmentation</option>
+            <option value="11">Image Detection</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <span class="label">What size do you demand for the model?</span>
+          <div class="segmented" role="radiogroup" aria-label="Model size">
+            <label><input type="radio" name="model_size" value="Small" /><span>Small</span></label>
+            <label>
+              <input type="radio" name="model_size" value="Medium" checked /><span>Medium</span>
+            </label>
+            <label><input type="radio" name="model_size" value="Large" /><span>Large</span></label>
+          </div>
+        </div>
+
+        <div class="field">
+          <span class="label">Your dataset</span>
+          <label class="dropzone" id="dropzone" for="file">
+            <input id="file" name="file" type="file" accept=".zip,application/zip" hidden />
+            <span class="dropzone-icon" aria-hidden="true">＋</span>
+            <span class="dropzone-title" id="dropzone-title">Drop your .zip here</span>
+            <span class="dropzone-hint" id="dropzone-hint">or click to browse</span>
+          </label>
+        </div>
+
+        <button id="submit" type="submit">Submit request</button>
+      </form>
+
+      <div class="progress" id="progress" hidden>
+        <div class="progress-bar" id="progress-bar"></div>
+      </div>
+      <p class="message" id="status" hidden></p>
+      <p class="message error" id="error" hidden></p>
+
+      <section class="result" id="result" hidden>
+        <h2 id="result-title">Request received</h2>
+        <p class="lede" id="result-text"></p>
+      </section>
+    </main>
+
+    <script src="/static/app.js"></script>
+  </body>
+</html>

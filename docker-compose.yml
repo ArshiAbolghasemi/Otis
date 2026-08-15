@@ -29,7 +29,7 @@ services:
     build:
       context: .
     image: otis:latest
-    command: ["bash", "scripts/run.sh"]
+    command: ["bash", "entrypoints/api.sh"]
     env_file:
       - .env
     environment:
@@ -49,13 +49,17 @@ services:
     build:
       context: .
     image: otis:latest
-    command: ["bash", "scripts/worker.sh"]
+    command: ["bash", "entrypoints/worker.sh"]
     env_file:
       - .env
     environment:
       POSTGRES_HOST: db
       CELERY_BROKER_URL: redis://redis:6379/0
       CELERY_RESULT_BACKEND: redis://redis:6379/1
+    # The worker runs the AI Farm script, so it needs AIFARM_ROOT (and the
+    # runtime the product entrypoints expect) inside the container:
+    # volumes:
+    #   - ${AIFARM_ROOT}:${AIFARM_ROOT}
     depends_on:
       db:
         condition: service_healthy

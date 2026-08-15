@@ -11,9 +11,14 @@ dependencies = [
     "psycopg2-binary>=2.9.0",
     "alembic>=1.13.0",
     "celery[redis]>=5.4.0",
+    "redis>=5.0.0",
     "pydantic[email]>=2.9.0",
     "pydantic-settings>=2.6.0",
     "httpx>=0.27.0",
+    "boto3>=1.35.0",
+    "python-multipart>=0.0.9",
+    "numpy>=2.2.6",
+    "pandas>=2.3.3",
 ]
 
 [dependency-groups]
@@ -31,7 +36,15 @@ select = ["E", "F", "I", "UP", "B", "C4", "SIM"]
 ignore = ["B008"]
 
 [tool.hatch.build.targets.wheel]
-packages = ["src/otis", "src/webhook", "src/aifarm", "src/util", "src/infrastructure"]
+packages = [
+    "src/otis",
+    "src/model",
+    "src/data",
+    "src/ui",
+    "src/aifarm",
+    "src/util",
+    "src/infrastructure",
+]
 
 [build-system]
 requires = ["hatchling"]
