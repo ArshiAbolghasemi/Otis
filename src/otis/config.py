@@ -43,8 +43,11 @@ class MailSettings(BaseSettings):
 
     host: str = "smtp.gmail.com"
     port: int = 587
+    #: The account SMTP logs in as - a full address, never a display name.
     username: str = ""
+    #: A Google *app password*, not the account password.
     password: str = ""
+    #: The From header; may carry a display name, e.g. "AI Farm <a@b.com>".
     sender: str = ""
     result_subject: str = "Your AI Farm result is ready"
     #: ``{download_link}`` and ``{expires_in}`` are filled in per result; a body
@@ -66,6 +69,12 @@ class MailSettings(BaseSettings):
     def _unescape_newlines(cls, value: str) -> str:
         """Allow multi-line bodies to be written on one ``.env`` line."""
         return value.replace("\\n", "\n")
+
+    @field_validator("password")
+    @classmethod
+    def _strip_spaces(cls, value: str) -> str:
+        """Google shows app passwords in groups of four; the spaces are display only."""
+        return "".join(value.split())
 
 
 class MinioSettings(BaseSettings):

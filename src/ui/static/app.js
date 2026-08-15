@@ -156,7 +156,7 @@
       const link = await uploadDataset(file);
 
       show(statusLine, "Submitting your request…");
-      const submission = await requestModel({
+      await requestModel({
         email: email.value.trim(),
         upload_link: link,
         model_size: size.value,
@@ -167,7 +167,7 @@
       progress.hidden = true;
       statusLine.hidden = true;
       resultText.textContent =
-        `Request #${submission.id} is queued. We will email the result to ` +
+        `Request is queued. We will email the result to ` +
         `${email.value.trim()} as soon as it is ready.`;
       result.hidden = false;
     } catch (failure) {
