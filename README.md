@@ -75,8 +75,8 @@ polls fixed directories under `AIFARM_ROOT`, so a run means:
 before running; a job that finds it taken re-queues itself 30s later instead of
 blocking the worker. Workers also run with `--concurrency=1`.
 
-The worker must therefore run on the machine that holds `AIFARM_ROOT` (in Docker,
-bind-mount it into the `worker` service — see `docker-compose.yml`).
+The worker must therefore run on the machine that holds `AIFARM_ROOT`. If you
+containerize the worker yourself, bind-mount that path into the container.
 
 ## Questionnaire
 
@@ -142,22 +142,22 @@ and is git-ignored). Gmail needs an **app password**; without valid SMTP
 credentials the pipeline still runs but the final mail step fails (and is
 reported as `FAILED`).
 
-## Run with Docker
+## Run infrastructure with Docker
 
 ```bash
-docker compose up --build
+docker compose -f infra/postgres/docker-compose.yml up -d
+docker compose -f infra/redis/docker-compose.yml up -d
 ```
 
-Starts PostgreSQL (official `postgres:16-alpine` image), Redis, the API
-(`entrypoints/run.sh` applies migrations then serves on http://localhost:8000) and
-the Celery `worker`.
+Starts PostgreSQL and Redis only, each from its own Compose file under `infra/`
+and the official upstream image. The API and Celery worker run outside Compose.
 
 ## Run locally
 
 ```bash
 uv sync
 ./entrypoints/migrate.sh                 # apply migrations
-./entrypoints/run.sh                     # API (migrate + uvicorn)
+./entrypoints/api.sh                     # API (migrate + uvicorn)
 ./entrypoints/worker.sh                  # Celery worker (separate shell)
 ./entrypoints/makemigration.sh "msg"     # create a new migration
 ```
