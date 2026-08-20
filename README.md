@@ -145,7 +145,7 @@ reported as `FAILED`).
 ## Run infrastructure with Docker
 
 ```bash
-docker compose -f infra/postgres/postgres.taml up -d
+docker compose -f infra/postgres/postgres.yaml up -d
 docker compose -f infra/redis/redis.yaml up -d
 ```
 
