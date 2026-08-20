@@ -145,8 +145,8 @@ reported as `FAILED`).
 ## Run infrastructure with Docker
 
 ```bash
-docker compose -f infra/postgres/docker-compose.yml up -d
-docker compose -f infra/redis/docker-compose.yml up -d
+docker compose -f infra/postgres/postgres.taml up -d
+docker compose -f infra/redis/redis.yaml up -d
 ```
 
 Starts PostgreSQL and Redis only, each from its own Compose file under `infra/`
